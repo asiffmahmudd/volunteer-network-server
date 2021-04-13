@@ -57,6 +57,13 @@ client.connect(err => {
     })
   })
 
+  app.get('/event/:name', (req,res) => {
+    eventsCollection.find({ $text: { $search: req.params.name }})
+    .toArray((err, documents) => {
+      res.send(documents);
+    })
+  })
+
 });
 
 
